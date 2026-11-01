@@ -1,0 +1,83 @@
+﻿{
+  "name": "hookbox",
+  "private": false,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "HookBox — a free webhook debugging inbox. Catch it. Inspect it. Debug it. Real HTTP endpoints, real persistence, real TTL.",
+  "license": "MIT",
+  "author": {
+    "name": "0xkillcoin",
+    "url": "https://x.com/0xkillcoin"
+  },
+  "homepage": "https://hookbox.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iiiiiiiiiiiiiKK/hookbox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iiiiiiiiiiiiiKK/hookbox/issues"
+  },
+  "keywords": [
+    "webhook",
+    "webhook-debugger",
+    "request-bin",
+    "http-inspector",
+    "cloudflare-workers",
+    "cloudflare-d1",
+    "react",
+    "typescript",
+    "developer-tools"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "wrangler dev --port 8787 --local",
+    "build": "tsc -p tsconfig.json --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.worker.json --noEmit && tsc -p tsconfig.tests.json --noEmit",
+    "lint": "npm run typecheck",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "db:migrate:local": "wrangler d1 migrations apply hookbox-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply hookbox-db --remote",
+    "db:init": "npm run db:migrate:local",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "node tests/integration/api.test.mjs",
+    "test:e2e": "playwright test",
+    "test:all": "npm run test && npm run test:integration && npm run test:e2e",
+    "serve:worker": "node scripts/serve-worker.mjs",
+    "shots": "node scripts/screenshots.mjs",
+    "verify:live": "node scripts/verify-live.mjs",
+    "build:pages": "node scripts/build-pages.mjs",
+    "deploy:pages": "node scripts/deploy-pages.mjs",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:dry": "npm run build && wrangler deploy --dry-run --outdir .wrangler/dry"
+  },
+  "dependencies": {
+    "lucide-react": "^1.65.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261023.1",
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5",
+    "wrangler": "^4.156.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "workerd@1.20261023.1": true
+  }
+}

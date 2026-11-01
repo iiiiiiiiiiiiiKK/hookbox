@@ -1,0 +1,34 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hookbox",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*", "/hook/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      // `database_name` is what `wrangler d1 ...` resolves against. When you
+      // deploy your own copy, run `wrangler d1 create hookbox-db` and paste the
+      // returned id here.
+      "database_name": "hookbox-db",
+      "database_id": "a1c4244c-aab0-4506-8ded-85ddbd806a2d",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // This deployment already uses all 5 free cron-trigger slots of the account,
+  // so periodic triggers are disabled here. HookBox therefore drains expired
+  // rows from inside the request path (throttled to once a minute, see
+  // worker/maintenance.ts). If your account has a free slot, uncomment:
+  // "triggers": { "crons": ["*/5 * * * *"] },
+  "observability": {
+    "enabled": true
+  },
+  "workers_dev": true,
+  "preview_urls": false
+}
