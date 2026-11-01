@@ -8,7 +8,7 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*", "/hook/*"]
+    "run_worker_first": ["/api/*", "/hook/*"],
   },
   "d1_databases": [
     {
@@ -18,8 +18,8 @@
       // returned id here.
       "database_name": "hookbox-db",
       "database_id": "a1c4244c-aab0-4506-8ded-85ddbd806a2d",
-      "migrations_dir": "migrations"
-    }
+      "migrations_dir": "migrations",
+    },
   ],
   // This deployment already uses all 5 free cron-trigger slots of the account,
   // so periodic triggers are disabled here. HookBox therefore drains expired
@@ -27,8 +27,8 @@
   // worker/maintenance.ts). If your account has a free slot, uncomment:
   // "triggers": { "crons": ["*/5 * * * *"] },
   "observability": {
-    "enabled": true
+    "enabled": true,
   },
   "workers_dev": true,
-  "preview_urls": false
+  "preview_urls": false,
 }
