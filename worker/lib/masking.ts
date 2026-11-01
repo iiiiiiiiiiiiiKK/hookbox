@@ -1,4 +1,4 @@
-import type { Pair } from '../../shared/types';
+﻿import type { Pair } from '../../shared/types';
 
 export const REDACTED = '••••••';
 
@@ -189,8 +189,4 @@ export function redactQueryPairs(pairs: Pair[], revealed: boolean): Pair[] {
   return pairs.map(([key, value]) =>
     isSensitiveField(key) && value.length >= 6 ? [key, REDACTED] : [key, value],
   );
-}
-
-export function maskUserAgent(ua: string | null): string | null {
-  return ua;
 }

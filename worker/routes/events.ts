@@ -1,7 +1,7 @@
 ﻿import type { Env } from '../env';
 import { LIMITS } from '../env';
 import { requireInbox } from '../lib/auth';
-import { jsonResponse, sleep } from '../lib/http';
+import { sleep } from '../lib/http';
 import { decodeCursor, encodeCursor } from '../lib/cursor';
 import { listRequests, listRequestsAfterCursor } from '../lib/store';
 
@@ -95,8 +95,4 @@ export async function handleEventStream(
   });
 
   return new Response(stream, { status: 200, headers: SSE_HEADERS });
-}
-
-export function streamUnavailable(message: string): Response {
-  return jsonResponse({ error: { code: 'stream_unavailable', message } }, { status: 503 });
 }

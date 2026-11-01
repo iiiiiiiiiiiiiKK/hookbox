@@ -144,7 +144,3 @@ export function clampInt(value: string | null, min: number, max: number, fallbac
   if (!Number.isFinite(parsed)) return fallback;
   return Math.min(max, Math.max(min, parsed));
 }
-
-export function timingSafeTimeString(value: number): string {
-  return new Date(value).toISOString();
-}
